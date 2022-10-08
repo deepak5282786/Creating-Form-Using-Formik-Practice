@@ -9,16 +9,16 @@ export const GlobalStyle = createGlobalStyle`
  
 }
 html{
-  font-size: 62.5%;
+  font-size: 70%;
 }
 body{
   background-color: #EFEDEE; 
    
 }
 h1{
-  font-size:2.6rem;
+  font-size:2.9rem;
 }
 p{
-  font-size: 1.6rem;
+  font-size: 1.9rem;
 }
 `;

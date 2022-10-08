@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { GlobalStyle } from "../Styles/globalStyles";
 import { useFormik } from "formik";
+import { SignUpSchema } from "../Schemas/validation";
 
 const initialValues = {
   name: "",
@@ -10,12 +11,16 @@ const initialValues = {
   confirm_password: "",
 };
 export const Registration = () => {
-  const { values, handleChange, handleSubmit, handleBlur } = useFormik({
-    initialValues: initialValues,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: SignUpSchema,
+      onSubmit: (values, actions) => {
+        alert(JSON.stringify(values, null, 2));
+        actions.resetForm();
+      },
+    });
+
   return (
     <>
       <GlobalStyle />
@@ -41,6 +46,10 @@ export const Registration = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+
+                    {touched.name && errors.name ? (
+                      <p className="form-error">{errors.name}</p>
+                    ) : null}
                   </div>
                   <div className="input-block">
                     <label htmlFor="email" className="input-label">
@@ -56,6 +65,9 @@ export const Registration = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {touched.email && errors.email ? (
+                      <p className="form-error">{errors.email}</p>
+                    ) : null}
                   </div>
                   <div className="input-block">
                     <label htmlFor="password" className="input-label">
@@ -71,6 +83,9 @@ export const Registration = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {touched.password && errors.password ? (
+                      <p className="form-error">{errors.password}</p>
+                    ) : null}
                   </div>
                   <div className="input-block">
                     <label htmlFor="confirm_password" className="input-label">
@@ -86,6 +101,9 @@ export const Registration = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {touched.confirm_password && errors.confirm_password ? (
+                      <p className="form-error">{errors.confirm_password}</p>
+                    ) : null}
                   </div>
                   <div className="modal-buttons">
                     <a href="#" className="">
@@ -200,7 +218,7 @@ const Wrapper = styled.section`
 
   .sign-up {
     margin: 60px 0 0;
-    font-size: 14px;
+    font-size: 1px;
     text-align: center;
   }
   .sign-up a {
